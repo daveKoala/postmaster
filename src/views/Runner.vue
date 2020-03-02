@@ -27,7 +27,6 @@ export default Vue.extend({
   methods: {
     async sendRequest() {
       try {
-        console.log("sendRequest");
         const response = await fetch(this.url, {
           headers: this.headers,
           method: "GET",
@@ -35,6 +34,7 @@ export default Vue.extend({
         });
         this.response = await response.json();
       } catch (err) {
+        /*eslint-disable */
         console.error(err);
       }
     }
