@@ -12,11 +12,9 @@
           @end="isDragging = false"
         >
           <transition-group type="transition" :name="'flip-list'">
-            <li class="list-group-item" v-for="element in list" :key="element.order">
+            <li class="list-group-item" v-for="(element, index) in list" :key="`list-${index}`">
               <i
-                :class="
-                  element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
-                "
+                :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
                 @click="element.fixed = !element.fixed"
                 aria-hidden="true"
               ></i>
@@ -30,11 +28,9 @@
       <v-col col="6">
         <draggable element="span" v-model="list2" v-bind="dragOptions" :move="onMove">
           <transition-group name="no" class="list-group" tag="ul">
-            <li class="list-group-item" v-for="element in list2" :key="element.order">
+            <li class="list-group-item" v-for="(element, index) in list2" :key="`list2-${index}`">
               <i
-                :class="
-                  element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
-                "
+                :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
                 @click="element.fixed = !element.fixed"
                 aria-hidden="true"
               ></i>
@@ -65,7 +61,7 @@ const message = ["cat", "dog", "chicken", "horse", "pig", "cow"];
 export default Vue.extend({
   name: "collectionRoot",
   components: {
-    draggable
+    draggable,
   },
   data: () => ({
     list: message.map((name, index) => {
@@ -75,17 +71,17 @@ export default Vue.extend({
       {
         name: "mouse",
         order: 4,
-        fixed: false
+        fixed: false,
       },
       {
         name: "squirel",
         order: 1,
-        fixed: false
-      }
+        fixed: false,
+      },
     ],
     editable: true,
     isDragging: false,
-    delayedDragging: false
+    delayedDragging: false,
   }),
   methods: {
     // orderList(): void {
@@ -96,10 +92,8 @@ export default Vue.extend({
     onMove({ relatedContext, draggedContext }: any) {
       const relatedElement = relatedContext.element;
       const draggedElement = draggedContext.element;
-      return (
-        (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
-      );
-    }
+      return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed;
+    },
   },
   computed: {
     dragOptions() {
@@ -107,7 +101,7 @@ export default Vue.extend({
         animation: 0,
         group: "description",
         disabled: !this.editable,
-        ghostClass: "ghost"
+        ghostClass: "ghost",
       };
     },
     listString() {
@@ -115,7 +109,7 @@ export default Vue.extend({
     },
     list2String() {
       return JSON.stringify(this.list2, null, 2);
-    }
+    },
   },
   watch: {
     isDragging(newValue) {
@@ -126,8 +120,8 @@ export default Vue.extend({
       this.$nextTick(() => {
         this.delayedDragging = false;
       });
-    }
-  }
+    },
+  },
 });
 </script>
 
