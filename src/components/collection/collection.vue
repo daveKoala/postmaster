@@ -60,16 +60,7 @@ import Vue from "vue";
 // @ts-ignore
 import draggable from "vuedraggable";
 
-const message = [
-  "vue.draggable",
-  "draggable",
-  "component",
-  "for",
-  "vue.js 2.0",
-  "based",
-  "on",
-  "Sortablejs"
-];
+const message = ["cat", "dog", "chicken", "horse", "pig", "cow"];
 
 export default Vue.extend({
   name: "collectionRoot",
@@ -82,12 +73,12 @@ export default Vue.extend({
     }),
     list2: [
       {
-        name: "for",
+        name: "mouse",
         order: 4,
         fixed: false
       },
       {
-        name: "vue.draggable",
+        name: "squirel",
         order: 1,
         fixed: false
       }
